@@ -960,6 +960,19 @@ void crocksdb_write(
   SaveError(errptr, db->rep->Write(options->rep, &batch->rep));
 }
 
+void crocksdb_write_multi_batch(
+    crocksdb_t* db,
+    const crocksdb_writeoptions_t* options,
+    crocksdb_writebatch_t** batches,
+    size_t batch_size,
+    char** errptr) {
+    std::vector<WriteBatch*> ws;
+  for (size_t i = 0; i < batch_size; i ++) {
+    ws.push_back(&batches[i]->rep);
+  }
+  SaveError(errptr, db->rep->MultiThreadWrite(options->rep, ws));
+}
+
 char* crocksdb_get(
     crocksdb_t* db,
     const crocksdb_readoptions_t* options,

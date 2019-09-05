@@ -912,6 +912,14 @@ extern "C" {
         batch: *mut DBWriteBatch,
         err: *mut *mut c_char,
     );
+    pub fn crocksdb_write_multi_batch(
+        db: *mut DBInstance,
+        writeopts: *const DBWriteOptions,
+        batch: *const *mut DBWriteBatch,
+        batchlen: size_t,
+        err: *mut *mut c_char,
+    );
+
     pub fn crocksdb_writebatch_create() -> *mut DBWriteBatch;
     pub fn crocksdb_writebatch_create_with_capacity(cap: size_t) -> *mut DBWriteBatch;
     pub fn crocksdb_writebatch_create_from(rep: *const u8, size: size_t) -> *mut DBWriteBatch;

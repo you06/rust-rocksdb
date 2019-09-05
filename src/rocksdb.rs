@@ -738,6 +738,18 @@ impl DB {
         &self.path
     }
 
+    pub fn multi_thread_write(&self, batches: &Vec<WriteBatch>, writeopts: &WriteOptions) -> Result<(), String> {
+        unsafe {
+            if batches.len() == 1 {
+                ffi_try!(crocksdb_write(self.inner, writeopts.inner, batches[0].inner));
+            } else {
+                let b : Vec<*mut DBWriteBatch> = batches.iter().map(|w| w.inner).collect();
+                ffi_try!(crocksdb_write_multi_batch(self.inner, writeopts.inner, b.as_ptr(), b.len()));
+            }
+        }
+        Ok(())
+    }
+
     pub fn write_opt(&self, batch: &WriteBatch, writeopts: &WriteOptions) -> Result<(), String> {
         unsafe {
             ffi_try!(crocksdb_write(self.inner, writeopts.inner, batch.inner));
