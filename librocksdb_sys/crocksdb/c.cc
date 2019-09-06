@@ -2607,6 +2607,11 @@ void crocksdb_options_set_unordered_write(crocksdb_options_t* opt,
   opt->rep.unordered_write = v;
 }
 
+void crocksdb_options_set_enable_multithread_write(crocksdb_options_t *opt,
+                                                 unsigned char v) {
+  opt->rep.enable_multi_thread_write = v;
+}
+
 void crocksdb_options_set_allow_concurrent_memtable_write(crocksdb_options_t* opt,
                                                          unsigned char v) {
   opt->rep.allow_concurrent_memtable_write = v;

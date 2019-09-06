@@ -1049,6 +1049,9 @@ crocksdb_options_set_enable_pipelined_write(crocksdb_options_t *, unsigned char)
 extern C_ROCKSDB_LIBRARY_API void
 crocksdb_options_set_unordered_write(crocksdb_options_t*, unsigned char);
 extern C_ROCKSDB_LIBRARY_API void
+crocksdb_options_set_enable_multithread_write(crocksdb_options_t *opt,
+                                             unsigned char v);
+extern C_ROCKSDB_LIBRARY_API void
 crocksdb_options_set_allow_concurrent_memtable_write(crocksdb_options_t *,
                                                      unsigned char);
 extern C_ROCKSDB_LIBRARY_API void crocksdb_options_set_manual_wal_flush(
