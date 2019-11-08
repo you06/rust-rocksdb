@@ -304,14 +304,6 @@ pub enum DBBackgroundErrorReason {
     MemTable = 4,
 }
 
-#[derive(Copy, Clone, Debug, Eq, PartialEq)]
-#[repr(C)]
-pub enum TransactionWritePolicy {
-    WriteCommitted = 0,
-    WritePrepared = 1,
-    WriteUnPrepared = 2,
-}
-
 pub fn error_message(ptr: *mut c_char) -> String {
     let c_str = unsafe { CStr::from_ptr(ptr) };
     let s = format!("{}", c_str.to_string_lossy());
