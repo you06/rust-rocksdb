@@ -18,9 +18,6 @@ extern crate libc;
 #[cfg(test)]
 extern crate tempdir;
 
-//<<<<<<< HEAD
-//use libc::{c_char, c_double, c_int, c_uchar, c_void, size_t, uint32_t, uint64_t, uint8_t};
-//=======
 use libc::{
     c_char, c_double, c_int, c_uchar, c_void, size_t,
 };
