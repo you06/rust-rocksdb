@@ -18,9 +18,7 @@ extern crate libc;
 #[cfg(test)]
 extern crate tempdir;
 
-use libc::{
-    c_char, c_double, c_int, c_uchar, c_void, size_t,
-};
+use libc::{c_char, c_double, c_int, c_uchar, c_void, size_t};
 use std::ffi::CStr;
 use std::fmt;
 
@@ -1409,8 +1407,7 @@ extern "C" {
         info: *mut ExternalSstFileInfo,
         size: *mut size_t,
     ) -> *const u8;
-    pub fn crocksdb_externalsstfileinfo_sequence_number(info: *mut ExternalSstFileInfo)
-        -> u64;
+    pub fn crocksdb_externalsstfileinfo_sequence_number(info: *mut ExternalSstFileInfo) -> u64;
     pub fn crocksdb_externalsstfileinfo_file_size(info: *mut ExternalSstFileInfo) -> u64;
     pub fn crocksdb_externalsstfileinfo_num_entries(info: *mut ExternalSstFileInfo) -> u64;
 
@@ -1694,18 +1691,12 @@ extern "C" {
         info: *const DBCompactionJobInfo,
     ) -> *const DBTablePropertiesCollection;
     pub fn crocksdb_compactionjobinfo_elapsed_micros(info: *const DBCompactionJobInfo) -> u64;
-    pub fn crocksdb_compactionjobinfo_num_corrupt_keys(
-        info: *const DBCompactionJobInfo,
-    ) -> u64;
+    pub fn crocksdb_compactionjobinfo_num_corrupt_keys(info: *const DBCompactionJobInfo) -> u64;
     pub fn crocksdb_compactionjobinfo_output_level(info: *const DBCompactionJobInfo) -> c_int;
     pub fn crocksdb_compactionjobinfo_input_records(info: *const DBCompactionJobInfo) -> u64;
     pub fn crocksdb_compactionjobinfo_output_records(info: *const DBCompactionJobInfo) -> u64;
-    pub fn crocksdb_compactionjobinfo_total_input_bytes(
-        info: *const DBCompactionJobInfo,
-    ) -> u64;
-    pub fn crocksdb_compactionjobinfo_total_output_bytes(
-        info: *const DBCompactionJobInfo,
-    ) -> u64;
+    pub fn crocksdb_compactionjobinfo_total_input_bytes(info: *const DBCompactionJobInfo) -> u64;
+    pub fn crocksdb_compactionjobinfo_total_output_bytes(info: *const DBCompactionJobInfo) -> u64;
     pub fn crocksdb_compactionjobinfo_compaction_reason(
         info: *const DBCompactionJobInfo,
     ) -> CompactionReason;
