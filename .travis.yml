@@ -24,7 +24,9 @@ cache:
   - target
 
 before_script:
-  - rustup component add rustfmt-preview
+  - rustup toolchain install nightly-2020-04-23
+  - rustup default nightly-2020-04-23
+  - rustup component add rustfmt
 
 script:
   - cargo fmt --all -- --check

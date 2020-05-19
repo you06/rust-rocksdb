@@ -203,6 +203,18 @@ impl PerfContext {
         unsafe { crocksdb_ffi::crocksdb_perf_context_db_mutex_lock_nanos(self.inner) }
     }
 
+    pub fn write_thread_wait_nanos(&self) -> u64 {
+        unsafe { crocksdb_ffi::crocksdb_perf_context_write_thread_wait_nanos(self.inner) }
+    }
+
+    pub fn write_scheduling_flushes_compactions_time(&self) -> u64 {
+        unsafe {
+            crocksdb_ffi::crocksdb_perf_context_write_scheduling_flushes_compactions_time(
+                self.inner,
+            )
+        }
+    }
+
     pub fn db_condition_wait_nanos(&self) -> u64 {
         unsafe { crocksdb_ffi::crocksdb_perf_context_db_condition_wait_nanos(self.inner) }
     }
