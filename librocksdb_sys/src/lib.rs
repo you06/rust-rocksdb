@@ -2141,6 +2141,7 @@ extern "C" {
             u64,
         ),
         finish: extern "C" fn(*mut c_void, *mut DBUserCollectedProperties),
+        need_compact: extern "C" fn(*const c_void) -> bool,
     ) -> *mut DBTablePropertiesCollector;
 
     pub fn crocksdb_table_properties_collector_destroy(c: *mut DBTablePropertiesCollector);

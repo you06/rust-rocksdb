@@ -5239,6 +5239,7 @@ struct crocksdb_table_properties_collector_t : public TablePropertiesCollector {
                size_t value_len, int entry_type, uint64_t seq,
                uint64_t file_size);
   void (*finish_)(void*, crocksdb_user_collected_properties_t* props);
+  bool (*need_compact_)(void*);
 
   virtual ~crocksdb_table_properties_collector_t() { destruct_(state_); }
 
@@ -5262,7 +5263,11 @@ struct crocksdb_table_properties_collector_t : public TablePropertiesCollector {
     return UserCollectedProperties();
   }
 
-  const char* Name() const override { return name_(state_); }
+  virtual const char* Name() const override { return name_(state_); }
+
+  virtual bool NeedCompact() const {
+    return need_compact_(state_);
+  }
 };
 
 crocksdb_table_properties_collector_t*
@@ -5271,13 +5276,15 @@ crocksdb_table_properties_collector_create(
     void (*add)(void*, const char* key, size_t key_len, const char* value,
                 size_t value_len, int entry_type, uint64_t seq,
                 uint64_t file_size),
-    void (*finish)(void*, crocksdb_user_collected_properties_t* props)) {
+    void (*finish)(void*, crocksdb_user_collected_properties_t* props),
+    bool (*need_compact)(void*)) {
   auto c = new crocksdb_table_properties_collector_t;
   c->state_ = state;
   c->name_ = name;
   c->destruct_ = destruct;
   c->add_ = add;
   c->finish_ = finish;
+  c->need_compact_ = need_compact;
   return c;
 }
 

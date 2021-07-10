@@ -31,6 +31,10 @@ pub trait TablePropertiesCollector {
     /// Will be called when a table has already been built and is ready for
     /// writing the properties block.
     fn finish(&mut self) -> HashMap<Vec<u8>, Vec<u8>>;
+
+    fn need_compact(&self) -> bool {
+        false
+    }
 }
 
 struct TablePropertiesCollectorHandle<T: TablePropertiesCollector> {
@@ -98,6 +102,13 @@ pub extern "C" fn finish<T: TablePropertiesCollector>(
     }
 }
 
+pub extern "C" fn need_compact<T: TablePropertiesCollector>(handle: *const c_void) -> bool {
+    unsafe {
+        let handle = &*(handle as *const TablePropertiesCollectorHandle<T>);
+        handle.rep.need_compact()
+    }
+}
+
 pub unsafe fn new_table_properties_collector<T: TablePropertiesCollector>(
     cname: &str,
     collector: T,
@@ -109,5 +120,6 @@ pub unsafe fn new_table_properties_collector<T: TablePropertiesCollector>(
         destruct::<T>,
         add::<T>,
         finish::<T>,
+        need_compact::<T>,
     )
 }

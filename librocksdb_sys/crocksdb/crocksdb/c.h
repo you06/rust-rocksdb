@@ -2087,7 +2087,8 @@ crocksdb_table_properties_collector_create(
     void (*add)(void*, const char* key, size_t key_len, const char* value,
                 size_t value_len, int entry_type, uint64_t seq,
                 uint64_t file_size),
-    void (*finish)(void*, crocksdb_user_collected_properties_t* props));
+    void (*finish)(void*, crocksdb_user_collected_properties_t* props),
+    bool (*need_compact)(void*));
 
 extern C_ROCKSDB_LIBRARY_API void crocksdb_table_properties_collector_destroy(
     crocksdb_table_properties_collector_t*);
